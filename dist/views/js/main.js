@@ -376,16 +376,18 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.style.width = "33.33%";
   pizzaContainer.style.height = "325px";
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
+  //pizzaImageContainer.style.width="35%";
   pizzaImageContainer.classList.add("col-md-6");
   
   // Optimization: used a compressed version of the original file but with same dimensions
-  pizzaImage.src = "images/pizza_compress.png";
+  pizzaImage.src = "images/pizza.png";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
 
 
   pizzaDescriptionContainer.classList.add("col-md-6");
+  //pizzaDescriptionContainer.style.width="65%";
 
   pizzaName = document.createElement("h4");
   pizzaName.innerHTML = randomName();
@@ -477,8 +479,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -515,11 +517,8 @@ function updatePositions() {
   var myScroll = document.body.scrollTop / 1250;
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin(myScroll + (i % 5));
-    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
- 	//items[i].style.left = items[i].basicLeft + 100 * phase + 'px'; //add will-change: transform to css
-	var left = -items[i].basicLeft + 1000 * phase + 'px';
- 	items[i].style.transform = "translateX("+left+") translateZ(0)";
 
+  items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -539,21 +538,26 @@ window.addEventListener('scroll', function() {
 });
 
 // Generates the sliding pizzas when the page loads.
-// Optimization: 40 pizzas instead of 200 to improve performance
+// Optimization: 30 pizzas instead of 200 to improve performance
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+
+  // Dynamically calculate the number of pizzas required to fill up the screen
+  var height = window.screen.height;
+  var rows = height / s;
+  var requiredPizzas= Math.ceil(rows*cols);
+
   //Optimization: create elem variable
   var elem;
   //Optimization: Create movingPizza1 array so do not have to run querySelector inside for loop
   var movingPizzas1 = document.getElementById("movingPizzas1");
-  for (var i = 0; i < 40; i++) {
+  for (var i = 0; i < requiredPizzas; i++) {
     elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza_compress-resized.png";
-    //resize initially using a grunt task
-	//elem.style.height = "100px";
-    //elem.style.width = "73.333px";
+    elem.src = "images/pizza.png";
+	  elem.style.height = "100px";
+    elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     //document.querySelector("#movingPizzas1").appendChild(elem);

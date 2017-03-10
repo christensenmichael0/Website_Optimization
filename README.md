@@ -57,10 +57,11 @@ $> npm install grunt-contrib-clean grunt-contrib-copy grunt-inline grunt-contrib
 - Minify perfmatters.js and analytics.js and also include async attribute to prevent render blocking. 
   This can be done since the scripts don't modify the DOM or CSSOM.
 - Use grunt-contrib-htmlmin plugin to minify html.
-- Make some responsive images in dist/views/images for optimizing webpage performance.
-  I did this for pizzeria.jpg and then use srcset in my index.html file to allow the browswer
-  decide which image to choose depending on device-pixel-ratio.
-- Compress images by using grunt-contrib-tinyimg plugin to minimize data transfer over the network.
+- Use grunt-responsive-images and grunt-tinyimg to optimally size and compress images
+- In index.html (homepage) deploy width and height attributes within the img tag for improved performance
+  '''
+  <img style="width: 100px; height: 50px;" src="...">
+  '''
 
 *Before Optimization-index.html*
 Mobile 27/100
@@ -75,9 +76,7 @@ Desktop 92/100
 
 1.) In the pizzaElementGenerator function in views/main.js:
 
-- Use a compressed version of the original file but with same dimensions
-
-```pizzaImage.src = "images/pizza_compress.png";```
+- Use a compressed version of the original pizza.png file (20.6 KB vs 48.7 KB)
 
 2.) In function determineDX in views/main.js:
 
@@ -115,12 +114,7 @@ var newwidth = (randomPizzaContainer[0].offsetWidth + dx) + 'px';
 - Define myScroll variable and pull it out of the for loop since it is constant -
 
   ```var myScroll = document.body.scrollTop / 1250;```
-  
-- Define the variable left to improve code readability -
-  ```var left = -items[i].basicLeft + 1000 * phase + 'px';```
- 	
-- Include translateX and translateZ transform functions to the sliding pizzas
-  ```items[i].style.transform = "translateX("+left+") translateZ(0)";```	
+  	
 
 5.) Include updatePositions function as a parameter to the window.requestAnimationFrame 
 method in the scroll event listener to optimize the animation.
@@ -134,15 +128,18 @@ window.addEventListener('scroll', function() {
 });
 ```
 
-6.) Create 40 sliding pizzas instead of 200 to improve performance and still get 
-the desired visual effect. Also, initially sized the pizza elements to 100 x 100 to 
-prevent the browser from having to resize/repaint (pizza_compress-resized.png). Also,
+6.) Create only the necessary number of sliding pizzas instead of 200 to improve performance and still get the desired visual effect. Also,
 create movingPizza1 array so do not have to run querySelector inside for loop
 ```
 document.addEventListener('DOMContentLoaded', function() {
 
   var cols = 8;
   var s = 256;
+
+  // Dynamically calculate the number of pizzas required to fill up the screen
+  var height = window.screen.height;
+  var rows = height / s;
+  var requiredPizzas= Math.ceil(rows*cols);
 
   //Optimization: create elem variable
 
@@ -151,19 +148,17 @@ document.addEventListener('DOMContentLoaded', function() {
   //Optimization: Create movingPizza1 array so do not have to run querySelector inside for loop
 
   var movingPizzas1 = document.getElementById("movingPizzas1");
-  for (var i = 0; i < 40; i++) {
+  for (var i = 0; i < requiredPizzas i++) {
 
     elem = document.createElement('img');
 
     elem.className = 'mover';
 
-    elem.src = "images/pizza_compress-resized.png";
+    elem.src = "images/pizza.png";
 
-    //resize initially using a grunt task
+    elem.style.height = "100px";
 
-    //elem.style.height = "100px";
-
-    //elem.style.width = "73.333px";
+    elem.style.width = "73.333px";
 
     elem.basicLeft = (i % cols) * s;
 
@@ -181,12 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
 ---------
 
 Time to resize pizzas before optimization - 199.02ms
-Time to resize pizzas after optimization - 1.00ms
+Time to resize pizzas after optimization ~ 1.00ms
 
 Inspecting the Timeline in Chrome devtools show dramatically improvements in 
 reducing jank. The framerate in most cases in better than 60 FPS.
-
-<img src="timeline_optimized.png" alt="optimized timeline" style="max-width: 100%"/>
 
 *Critical CSS Tools*
 <a href="https://github.com/addyosmani/critical-path-css-tools" target="_blank"></a>
