@@ -59,17 +59,15 @@ $> npm install grunt-contrib-clean grunt-contrib-copy grunt-inline grunt-contrib
 - Use grunt-contrib-htmlmin plugin to minify html.
 - Use grunt-responsive-images and grunt-tinyimg to optimally size and compress images
 - In index.html (homepage) deploy width and height attributes within the img tag for improved performance
-  '''
-  <img style="width: 100px; height: 50px;" src="...">
-  '''
+  
 
 *Before Optimization-index.html*
 Mobile 27/100
 Desktop 29/100
 
 *After Optimization-index.html*
-Mobile 93/100
-Desktop 92/100
+Mobile >90
+Desktop >90
 
 ####Improve Performance of sliding pizzas in pizza.html
 ----------------------------------------------------
