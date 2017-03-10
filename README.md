@@ -1,6 +1,6 @@
 #Front-End Web Developer Nanodegree Project 4 -- Website Optimization
 Michael Christensen
-February 2017
+March 2017
 
 ####Objectives:
 --------------
@@ -193,12 +193,12 @@ reducing jank. The framerate in most cases in better than 60 FPS.
 
 Resources
 
-<a href="https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful/" target="_blank"></a>
-<a href="https://www.npmjs.com/package/grunt-inline" target="_blank"></a>
-<a href="https://github.com/gruntjs/grunt-contrib-clean" target="_blank"></a>
-<a href="https://developers.google.com/speed/pagespeed/insights" target="_blank"></a>
-<a href="https://github.com/andismith/grunt-responsive-images" target="_blank"></a>
-<a href="http://cameronwp.github.io/udportfolio/views/pizza.html" target="_blank"></a>
-<a href="https://github.com/junjunruan/P4-Website-Optimization" target="_blank"></a>
-<a href="https://github.com/allanbreyes/udacity-front-end/tree/master/p4" target="_blank"></a>
-<a href="https://github.com/mikejoyceio/website-optimization" target="_blank"></a>
+<https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful>
+<https://www.npmjs.com/package/grunt-inline>
+<https://github.com/gruntjs/grunt-contrib-clean>
+<https://developers.google.com/speed/pagespeed/insights>
+<https://github.com/andismith/grunt-responsive-images>
+<http://cameronwp.github.io/udportfolio/views/pizza.html>
+<https://github.com/junjunruan/P4-Website-Optimization>
+<https://github.com/allanbreyes/udacity-front-end/tree/master/p4>
+<https://github.com/mikejoyceio/website-optimization>
