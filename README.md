@@ -193,12 +193,12 @@ reducing jank. The framerate in most cases in better than 60 FPS.
 
 Resources
 
-<https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful>
-<https://www.npmjs.com/package/grunt-inline>
-<https://github.com/gruntjs/grunt-contrib-clean>
-<https://developers.google.com/speed/pagespeed/insights>
-<https://github.com/andismith/grunt-responsive-images>
-<http://cameronwp.github.io/udportfolio/views/pizza.html>
-<https://github.com/junjunruan/P4-Website-Optimization>
-<https://github.com/allanbreyes/udacity-front-end/tree/master/p4>
-<https://github.com/mikejoyceio/website-optimization>
+[https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful]
+[https://www.npmjs.com/package/grunt-inline]
+[https://github.com/gruntjs/grunt-contrib-clean]
+[https://developers.google.com/speed/pagespeed/insights]
+[https://github.com/andismith/grunt-responsive-images]
+[http://cameronwp.github.io/udportfolio/views/pizza.html]
+[https://github.com/junjunruan/P4-Website-Optimization]
+[https://github.com/allanbreyes/udacity-front-end/tree/master/p4]
+[https://github.com/mikejoyceio/website-optimization]
