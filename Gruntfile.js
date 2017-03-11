@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: { // Dictionary of files
-                    './index.html' : './index_pretty.html' // 'destination': 'source'
+                    'index.html' : 'index.html' // 'destination': 'source'
                 }
             },
             other_files: { // Another target
@@ -68,8 +68,8 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'src',
-                    src: ['**/*.html','*.html'],
+                    cwd: 'dist',
+                    src: ['**/*.html'],
                     dest: 'dist'
                 }]
             }
@@ -128,5 +128,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-tinyimg');
     // Default tasks.
     
-    grunt.registerTask('default', ['clean', 'copy', 'inline', 'uglify', 'htmlmin', 'responsive_images', 'tinyimg']);
+    grunt.registerTask('default', ['clean', 'copy', 'inline', 'uglify','htmlmin', 'responsive_images', 'tinyimg']);
 };
