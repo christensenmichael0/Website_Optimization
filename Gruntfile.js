@@ -50,17 +50,22 @@ module.exports = function(grunt) {
             }
         },
         // Minify html files
-        htmlmin: {
-            options: { // Target options
-                removeComments: true,
-                collapseWhitespace: true
+        htmlmin: { // Task
+            main_file: { // Target
+                options: { // Target options
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: { // Dictionary of files
+                    'index.html': 'index_pretty.html' // 'destination': 'source'
+                }
             },
-            dist: {
+            other_files: { // Another target
                 files: [{
-                    expand: true, // Enable dynamic expansion.
-                    cwd: 'dist/', // Src matches are relative to this path.
-                    src: ['**/*.html'], // Actual pattern(s) to match.
-                    dest: 'dist/', // Destination path prefix.
+                    expand: true,
+                    cwd: 'src',
+                    src: ['**/*.html'],
+                    dest: 'dist'
                 }]
             }
         },
@@ -96,7 +101,7 @@ module.exports = function(grunt) {
                 }]
             }
         },
-        // Minify images
+        // Minify images (only in dist folder)
         tinyimg: {
             dynamic: { // target
                 files: [{
