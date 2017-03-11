@@ -1,36 +1,37 @@
 module.exports = function(grunt) {
     grunt.initConfig({
+        
         // clean
-        clean: {
-            contents: ['dist/*']
-        },
-        // Copy all the files from src to dist
+        clean: ['index.html', 'dist/*'],
+        // Copy all the css files from src to dist
+        
         copy: {
             dist: {
                 cwd: 'src/',
                 expand: true,
-                src: '**',
+                src: '**/*.{css,png,PNG,jpg,jpeg,JPG,gif,GIF}',
                 dest: 'dist/'
             }
         },
+        
         // Inline CSS and JS
         inline: {
             target1: {
                 options: {
                     inlineTagAttributes: {
-                        js: 'data-inlined="true"',
+                        /*js: 'data-inlined="true"',*/
                         css: 'data-inlined="true"'
                     },
                     cssmin: true,
                     uglify: true
                 },
-                src: 'src/index.html',
-                dest: 'dist/index.html'
+                src: 'index_pretty.html',
+                dest: 'index.html'
             },
             target2: {
                 options: {
                     inlineTagAttributes: {
-                        js: 'data-inlined="true"',
+                        /*js: 'data-inlined="true"',*/
                         css: 'data-inlined="true"'
                     },
                     cssmin: true,
@@ -57,14 +58,18 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: { // Dictionary of files
-                    'index.html': 'index_pretty.html' // 'destination': 'source'
+                    './index.html' : './index_pretty.html' // 'destination': 'source'
                 }
             },
             other_files: { // Another target
+                options: { // Target options
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
                 files: [{
                     expand: true,
                     cwd: 'src',
-                    src: ['**/*.html'],
+                    src: ['**/*.html','*.html'],
                     dest: 'dist'
                 }]
             }
@@ -122,5 +127,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-responsive-images');
     grunt.loadNpmTasks('grunt-tinyimg');
     // Default tasks.
+    
     grunt.registerTask('default', ['clean', 'copy', 'inline', 'uglify', 'htmlmin', 'responsive_images', 'tinyimg']);
 };
